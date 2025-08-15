@@ -1,0 +1,458 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Georgia', serif;
+  background: linear-gradient(135deg, #8B4513, #D2691E);
+  min-height: 100vh;
+  color: #2F1B14;
+}
+
+#game-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#welcome-screen, #name-selection-screen, #civilization-selection-screen {
+  background: rgba(245, 222, 179, 0.95);
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  margin-top: 100px;
+}
+
+#welcome-screen h1, #name-selection-screen h1, #civilization-selection-screen h1 {
+  color: #8B4513;
+  font-size: 3em;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+#welcome-screen h2, #name-selection-screen h2 {
+  color: #654321;
+  font-size: 1.8em;
+  margin-bottom: 30px;
+}
+
+#save-options {
+  margin-bottom: 30px;
+}
+
+#new-game-btn, #load-game-btn, #start-game-btn {
+  background: #4B0082;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#new-game-btn:hover, #load-game-btn:hover, #start-game-btn:hover {
+  background: #6A0DAD;
+}
+
+#name-input-section {
+  margin-top: 20px;
+}
+
+#name-input-section label {
+  display: block;
+  font-size: 1.3em;
+  color: #654321;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#player-name {
+  padding: 12px 20px;
+  font-size: 1.2em;
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  width: 300px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#continue-btn {
+  background: #228B22;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#continue-btn:hover:not(:disabled) {
+  background: #32CD32;
+}
+
+#continue-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+#civ-choices {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.civ-choice {
+  background: #DEB887;
+  border: 3px solid #8B4513;
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.civ-choice:hover {
+  background: #F5DEB3;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.civ-choice.selected {
+  border-color: #4B0082;
+  background: #E6E6FA;
+}
+
+.civ-choice.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #999;
+}
+
+.civ-choice.disabled:hover {
+  background: #999;
+  transform: none;
+  box-shadow: none;
+}
+
+#advanced-civs h2 {
+  color: #8B4513;
+  text-align: center;
+  margin: 30px 0 20px 0;
+  font-size: 1.5em;
+}
+
+.civ-choice h3 {
+  color: #8B4513;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.civ-choice p {
+  color: #654321;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+.civ-choice .civ-bonus {
+  background: #32CD32;
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+header {
+  background: rgba(139, 69, 19, 0.9);
+  color: #F5DEB3;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+header h1 {
+  font-size: 2.5em;
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#game-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+#share-save-btn {
+  background: #4B0082;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: bold;
+}
+
+#share-save-btn:hover {
+  background: #6A0DAD;
+}
+
+#share-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#share-modal-content {
+  background: #F5DEB3;
+  padding: 30px;
+  border-radius: 15px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+}
+
+#share-modal-content h3 {
+  color: #8B4513;
+  margin-bottom: 15px;
+}
+
+#share-url {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border: 2px solid #8B4513;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+#copy-url-btn, #close-modal-btn {
+  background: #228B22;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#copy-url-btn:hover, #close-modal-btn:hover {
+  background: #32CD32;
+}
+
+#close-modal-btn {
+  background: #CD853F;
+}
+
+#close-modal-btn:hover {
+  background: #D2691E;
+}
+
+#main-game {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+}
+
+#civilization-info {
+  background: rgba(245, 222, 179, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#civilization-info h2 {
+  color: #8B4513;
+  margin-bottom: 10px;
+  font-size: 1.8em;
+}
+
+#civ-bonus {
+  background: #32CD32;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#army-section {
+  background: rgba(245, 222, 179, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#army-section h3 {
+  color: #8B4513;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+.troop-card {
+  background: #DEB887;
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.troop-info {
+  flex-grow: 1;
+}
+
+.troop-name {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.troop-stats {
+  font-size: 0.9em;
+  color: #654321;
+}
+
+.recruit-btn {
+  background: #228B22;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.recruit-btn:hover {
+  background: #32CD32;
+}
+
+.recruit-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+#battle-section {
+  background: rgba(245, 222, 179, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#battle-section h3 {
+  color: #8B4513;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+#hunt-button, #raid-button {
+  background: #CD853F;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+
+#hunt-button:hover, #raid-button:hover {
+  background: #D2691E;
+}
+
+#battle-log {
+  background: #F5F5DC;
+  border: 2px solid #8B4513;
+  border-radius: 5px;
+  padding: 15px;
+  margin-top: 15px;
+  height: 120px;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+}
+
+#advancement-section {
+  background: rgba(245, 222, 179, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+#advancement-section h3 {
+  color: #8B4513;
+  margin-bottom: 15px;
+  font-size: 1.5em;
+}
+
+#next-civ {
+  color: #4B0082;
+  font-size: 1.3em;
+  margin-bottom: 10px;
+}
+
+#buy-scroll {
+  background: #4B0082;
+  color: white;
+  border: none;
+  padding: 15px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+#buy-scroll:hover:not(:disabled) {
+  background: #6A0DAD;
+}
+
+#buy-scroll:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
+
+.army-unit {
+  background: #DEB887;
+  border: 2px solid #8B4513;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 5px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unit-name {
+  font-weight: bold;
+}
+
+.unit-count {
+  background: #8B4513;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-weight: bold;
+}
