@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Civilization Wars - From Stone Age to Space Age</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <div id="game-container">
+    <!-- Welcome Screen -->
+    <div id="welcome-screen">
+      <h1>Civilization Wars</h1>
+      <h2>Welcome, Commander!</h2>
+      <div id="save-options" style="display: none;">
+        <button id="new-game-btn">New Game</button>
+        <button id="load-game-btn">Load from Saves</button>
+      </div>
+      <div id="no-save-options">
+        <button id="start-game-btn">Start New Game</button>
+      </div>
+    </div>
+
+    <!-- Name Selection Screen -->
+    <div id="name-selection-screen" style="display: none;">
+      <h1>Civilization Wars</h1>
+      <h2>Enter Your Name</h2>
+      <div id="name-input-section">
+        <label for="player-name">Enter your name:</label>
+        <input type="text" id="player-name" placeholder="Your name" maxlength="20">
+        <button id="continue-btn" disabled>Continue</button>
+      </div>
+    </div>
+
+    <!-- Civilization Selection Screen -->
+    <div id="civilization-selection-screen" style="display: none;">
+      <h1>Choose Your Starting Civilization</h1>
+      <div id="civ-choices">
+        <div class="civ-choice" data-civ="cavemen">
+          <h3>Cavemen</h3>
+          <p>Primitive cave dwellers who have mastered fire and stone tools</p>
+          <div class="civ-bonus">+25% population growth, +20% defensive bonus</div>
+        </div>
+        <div class="civ-choice" data-civ="nomads">
+          <h3>Nomads</h3>
+          <p>Wandering hunters following mammoth herds across frozen plains</p>
+          <div class="civ-bonus">+30% hunting rewards, +15% movement speed</div>
+        </div>
+        <div class="civ-choice" data-civ="settlers">
+          <h3>Settlers</h3>
+          <p>Early farmers who have learned to cultivate crops and domesticate animals</p>
+          <div class="civ-bonus">+35% gold income, +10% faster advancement</div>
+        </div>
+      </div>
+      <div id="advanced-civs">
+        <h2>Bronze Age Civilizations</h2>
+        <div class="civ-choice" data-civ="bronze-egypt">
+          <h3>Egyptian Kingdom</h3>
+          <p>Masters of the Nile with advanced bronze working and monumental architecture</p>
+          <div class="civ-bonus">+40% gold income, +25% construction speed</div>
+        </div>
+        <div class="civ-choice" data-civ="bronze-assyrian">
+          <h3>Assyrian Empire</h3>
+          <p>Fierce warriors with iron discipline and superior bronze weapons</p>
+          <div class="civ-bonus">+35% military strength, +20% conquest rewards</div>
+        </div>
+        <div class="civ-choice" data-civ="bronze-babylonian">
+          <h3>Babylonian City-State</h3>
+          <p>Advanced scholars and traders with written laws and mathematics</p>
+          <div class="civ-bonus">+30% research speed, +25% trade efficiency</div>
+        </div>
+      </div>
+    </div>
+
+    <header id="game-header" style="display: none;">
+      <h1>Civilization Wars</h1>
+      <div id="game-stats">
+        <span id="player-name-display"></span>
+        <span id="civilization">Stone Age</span>
+        <span id="money">Gold: 100</span>
+        <span id="population">Population: 50</span>
+        <button id="share-save-btn" title="Share your save with others">📤 Share Save</button>
+      </div>
+    </header>
+
+    <div id="main-game" style="display: none;">
+      <div id="civilization-info">
+        <h2 id="civ-name">Stone Age Tribe</h2>
+        <p id="civ-description">Your primitive tribe struggles to survive in a harsh world. Hunt mammoth and gather resources to grow stronger.</p>
+        <div id="civ-bonus">Bonus: +25% hunting efficiency</div>
+      </div>
+
+      <div id="army-section">
+        <h3>Your Army</h3>
+        <div id="army-display"></div>
+        <div id="recruit-section">
+          <h4>Recruit Troops</h4>
+          <div id="troop-options"></div>
+        </div>
+      </div>
+
+      <div id="battle-section">
+        <h3>Battle</h3>
+        <button id="hunt-button">Hunt for Resources</button>
+        <button id="raid-button">Raid Enemy Settlement</button>
+        <div id="battle-log"></div>
+      </div>
+
+      <div id="advancement-section">
+        <h3>Advancement</h3>
+        <div id="scroll-info">
+          <h4 id="next-civ">Next: Bronze Age</h4>
+          <p id="scroll-cost">Advancement Scroll Cost: 500 Gold</p>
+          <button id="buy-scroll" disabled>Purchase Advancement Scroll</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div id="share-modal" style="display: none;">
+      <div id="share-modal-content">
+        <h3>Share Your Save</h3>
+        <p>Copy this URL to share your save with others or access it from any device:</p>
+        <input type="text" id="share-url" readonly>
+        <div>
+          <button id="copy-url-btn">Copy URL</button>
+          <button id="close-modal-btn">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
